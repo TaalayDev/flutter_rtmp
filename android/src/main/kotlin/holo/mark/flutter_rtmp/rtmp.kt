@@ -122,7 +122,7 @@ class RtmpManagerV2 : AppCompatActivity(), MethodChannel.MethodCallHandler, SrsE
     private fun rotateOrientation(param: Map<String, Any>, result: MethodChannel.Result) {
         val force: Boolean = param["force"] as Boolean
         val origin: Int = param["orien"] as Int
-        val indexori = FlutterRtmpPlugin.registrar.activity().resources.configuration.orientation - 1
+        val indexori = FlutterRtmpPlugin.registrar.activity()!!.resources.configuration.orientation - 1
         if (!force && indexori == origin) {
             result.success(Response().setValue(ErrCode.RepeatOperation, false, "", loger.toMap()))
             return
@@ -159,7 +159,7 @@ class RtmpManagerV2 : AppCompatActivity(), MethodChannel.MethodCallHandler, SrsE
         var numOfCamera: Int
         var errmsg: String = "ok"
         try {
-            val manager: CameraManager = FlutterRtmpPlugin.registrar.activity().getSystemService(Context.CAMERA_SERVICE) as CameraManager
+            val manager: CameraManager = FlutterRtmpPlugin.registrar.activity()!!.getSystemService(Context.CAMERA_SERVICE) as CameraManager
             numOfCamera = manager.cameraIdList.count()
         } catch (e: Exception) {
             numOfCamera = 2
